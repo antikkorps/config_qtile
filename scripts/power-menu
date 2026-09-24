@@ -1,0 +1,12 @@
+#!/bin/sh
+# Menu rofi : verrouiller, veille, déconnexion, redémarrer, éteindre
+choice=$(printf '%s\n' Verrouiller Veille Déconnexion Redémarrer Éteindre \
+    | rofi -dmenu -i -p "Session")
+
+case "$choice" in
+    Verrouiller) i3lock -c 000000 ;;
+    Veille)      i3lock -c 000000 && systemctl suspend ;;
+    Déconnexion) qtile cmd-obj -o root -f shutdown ;;
+    Redémarrer)  systemctl reboot ;;
+    Éteindre)    systemctl poweroff ;;
+esac
